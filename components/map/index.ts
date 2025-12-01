@@ -15,3 +15,4 @@ export { MapTopBar } from './MapTopBar';
 export { MapLayersPanel } from './MapLayersPanel';
 export { MapControls } from './MapControls';
 export { MapThemeSwitcher } from './MapThemeSwitcher';
+export { MapUser } from './MapUser';

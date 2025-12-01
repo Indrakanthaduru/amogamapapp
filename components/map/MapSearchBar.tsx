@@ -11,6 +11,7 @@ import {
   PencilRuler,
 } from "lucide-react";
 import { useGeolocation } from "@/hooks/useGeolocation";
+import { MapUser } from "./MapUser";
 
 interface Country {
   id: string;
@@ -172,7 +173,7 @@ export function MapSearchBar({
     <div className="search-container absolute left-0 right-0 sm:left-4 sm:right-auto top-3 z-[1001] px-4 sm:px-0">
       {/* Search Box - always visible */}
       <div
-        className={`flex items-center gap-2 bg-white dark:bg-gray-700/80 backdrop-blur px-4 py-5 sm:py-3.5 shadow-lg transition-all duration-50 ${
+        className={`flex items-center gap-2 bg-white dark:bg-gray-700/80 backdrop-blur px-4 py-2 sm:py-3.5 shadow-lg transition-all duration-50 ${
           isExpanded ? "rounded-t-lg" : "rounded-full"
         } w-full sm:w-[360px]`}
       >
@@ -215,7 +216,7 @@ export function MapSearchBar({
               onChange={(e) => setSearchQuery(e.target.value)}
               onFocus={() => setIsExpanded(true)}
               onKeyDown={handleKeyDown}
-              className="border-none bg-transparent text-sm text-gray-800 dark:text-gray-200 font-semibold outline-none placeholder:text-gray-500 dark:placeholder:text-gray-200 transition-all duration-300 w-full"
+              className="border-none bg-transparent text-base sm:text-sm text-gray-800 dark:text-gray-200 font-semibold outline-none placeholder:text-gray-500 dark:placeholder:text-gray-200 transition-all duration-300 w-full"
               aria-label="Search countries"
               aria-controls="search-results"
               aria-activedescendant={
@@ -230,10 +231,11 @@ export function MapSearchBar({
           </>
         )}
         <div className="ml-2 flex items-center gap-2 border-l border-gray-200 dark:border-gray-700 pl-3">
+          {/* Desktop: Show locate button */}
           <button
             onClick={handleLocateMe}
             disabled={!isAvailable || isLocating}
-            className={`text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 rounded transition-all ${
+            className={`hidden sm:block text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 rounded transition-all ${
               isLocating ? "animate-pulse" : ""
             } disabled:opacity-50 disabled:cursor-not-allowed`}
             aria-label="Show current location"
@@ -242,6 +244,11 @@ export function MapSearchBar({
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
             </svg>
           </button>
+
+          {/* Mobile: Show user menu */}
+          <div className="sm:hidden">
+            <MapUser />
+          </div>
         </div>
       </div>
 

@@ -30,7 +30,7 @@ export function MapControls() {
   }, []);
 
   return (
-    <div className="absolute bottom-8 right-4 flex flex-col items-center gap-2 z-[1000]">
+    <div className="absolute bottom-24 sm:bottom-8 right-4 flex flex-col items-center gap-2 z-[1000]">
       {/* Location Button */}
       <button
         onClick={locateUser}

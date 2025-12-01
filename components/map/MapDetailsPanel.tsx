@@ -244,7 +244,7 @@ export function MapDetailsPanel({ country, onClose }: MapDetailsPanelProps) {
     </div>
   );
 
-  // Mobile: Use Drawer with snap points at 50% and 100%
+  // Mobile: Use Drawer with snap points - no overlay to keep map accessible
   if (isMobile) {
     return (
       <Drawer.Root
@@ -253,10 +253,14 @@ export function MapDetailsPanel({ country, onClose }: MapDetailsPanelProps) {
         snapPoints={snapPoints}
         activeSnapPoint={snap}
         setActiveSnapPoint={setSnap}
+        modal={false}
+        noBodyStyles
       >
         <Drawer.Portal>
-          <Drawer.Overlay className="fixed inset-0 bg-black/40 !z-[1100]" />
-          <Drawer.Content className="fixed flex flex-col bg-white dark:bg-gray-900 rounded-t-[10px] bottom-0 left-0 right-0 h-full max-h-[97%] !z-[1100]">
+          <Drawer.Content
+            className="fixed flex flex-col bg-white dark:bg-gray-900 rounded-t-[10px] bottom-0 left-0 right-0 h-full max-h-[97%] !z-[1100] shadow-[0_-10px_40px_rgba(0,0,0,0.2)]"
+            aria-describedby={undefined}
+          >
             <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-gray-300 dark:bg-gray-600" />
             <div className="flex-1 overflow-hidden">
               <Drawer.Title className="sr-only">

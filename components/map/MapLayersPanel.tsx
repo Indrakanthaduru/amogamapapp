@@ -57,33 +57,16 @@ export function MapLayersPanel({
 
   return (
     <div
-      className="absolute bottom-8 left-4 flex items-center gap-2 z-[1000]"
+      className="absolute bottom-24 sm:bottom-8 left-4 flex flex-col sm:flex-row items-start sm:items-center gap-2 z-[1000]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Main Layer Button */}
-      <div className="flex flex-col items-center gap-1">
-        <button
-          className="overflow-hidden rounded-lg bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all"
-          aria-label="Layer options"
-        >
-          <div
-            className={`h-18 w-20 bg-gradient-to-br ${selectedLayer.preview} flex items-center justify-center`}
-          >
-            <selectedLayer.icon className="h-6 w-6 text-white" />
-          </div>
-          <span className="rounded bg-white dark:bg-gray-800 px-2 text-xs font-medium text-gray-700 dark:text-gray-300">
-            {selectedLayer.label}
-          </span>
-        </button>
-      </div>
-
-      {/* Slide-out Panel */}
+      {/* Slide-out Panel - Above on mobile, Right on desktop */}
       <div
-        className={`flex items-center gap-2 transition-all duration-300 ease-out ${
+        className={`order-first sm:order-last flex items-center gap-2 transition-all duration-300 ease-out ${
           isHovered
-            ? "opacity-100 translate-x-0"
-            : "opacity-0 -translate-x-4 pointer-events-none"
+            ? "opacity-100 translate-y-0 sm:translate-y-0 sm:translate-x-0"
+            : "opacity-0 translate-y-4 sm:translate-y-0 sm:-translate-x-4 pointer-events-none"
         }`}
       >
         <div className="flex items-center gap-2 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-1 border border-gray-200 dark:border-gray-700">
@@ -92,7 +75,7 @@ export function MapLayersPanel({
               key={layer.id}
               onClick={() => layer.provider && onProviderChange(layer.id)}
               disabled={!layer.provider}
-              className={`flex flex-col items-center gap-1.5 px-3 py-2 rounded-xl transition-all ${
+              className={`flex flex-col items-center gap-1.5 px-2 sm:px-3 py-2 rounded-xl transition-all ${
                 selectedProviderId === layer.id
                   ? "bg-blue-50 dark:bg-blue-900/30 ring-2 ring-blue-500 dark:ring-blue-400"
                   : "hover:bg-gray-50 dark:hover:bg-gray-700"
@@ -100,16 +83,33 @@ export function MapLayersPanel({
               title={layer.label}
             >
               <div
-                className={`h-12 w-12 rounded-lg bg-gradient-to-br ${layer.preview} flex items-center justify-center overflow-hidden shadow-sm`}
+                className={`h-10 w-10 sm:h-12 sm:w-12 rounded-lg bg-gradient-to-br ${layer.preview} flex items-center justify-center overflow-hidden shadow-sm`}
               >
-                <layer.icon className="h-6 w-6 text-white" />
+                <layer.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
               </div>
-              <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
+              <span className="text-[10px] sm:text-xs font-medium text-gray-700 dark:text-gray-300">
                 {layer.label}
               </span>
             </button>
           ))}
         </div>
+      </div>
+
+      {/* Main Layer Button */}
+      <div className="flex flex-col items-center gap-1">
+        <button
+          className="overflow-hidden rounded-lg bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all"
+          aria-label="Layer options"
+        >
+          <div
+            className={`h-16 w-16 sm:h-18 sm:w-20 bg-gradient-to-br ${selectedLayer.preview} flex items-center justify-center`}
+          >
+            <selectedLayer.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+          </div>
+          <span className="rounded bg-white dark:bg-gray-800 px-2 text-[10px] sm:text-xs font-medium text-gray-700 dark:text-gray-300">
+            {selectedLayer.label}
+          </span>
+        </button>
       </div>
     </div>
   );
